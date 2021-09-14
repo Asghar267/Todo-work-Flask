@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container my-3">
+    <h2>Add Todo Work</h2>
+    <form action="/" method="POST">
+        <div class="mb-3">
+            <label class="form-label" for="title">Todo Work Title</label>
+            <input aria-describedby="emailHelp" class="form-control" id="title" name="title" type="text">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="description">Todo Work Description</label>
+            <input class="form-control" id="description" name="desc" type="text">
+        </div>
+        <button class="btn btn-outline-dark " type="submit">Submit</button>
+    </form>
+</div>
+
+<div class="container my-3">
+    <h2>Your Todos Work</h2>
+    <table class="table table-hover table-light ">
+        <thead>
+        <tr>
+            <th scope="col">sno</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date</th>
+            <th scope="col">Update / Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if alltodo|length == 0 %}
+        <div class="alert alert-dark" role="alert">
+            No Todos Found! Add Your Todos
+        </div>
+        {% else %}
+        {% for todo in alltodo %}
+        <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td>{{todo.title}}</td>
+            <td>{{todo.desc}}</td>
+            <td>{{todo.date_created}}</td>
+            <td>
+                <a class="btn btn-outline-dark btn-sm mx-1" href="/update/{{todo.sno}}" type="button">Update</a>
+                <a class="btn btn-outline-dark btn-sm mx-1" href="/delete/{{todo.sno}}" type="button">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+
+        </tbody>
+    </table>
+</div>
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script crossorigin="anonymous"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+-->
+{% endblock body %}
